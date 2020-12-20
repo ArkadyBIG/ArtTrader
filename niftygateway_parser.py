@@ -42,7 +42,7 @@ class NiftygatewayParser:
         prefs = {"profile.managed_default_content_settings.images": 2, 
                  'profile.default_content_settings.images': 2}
         chrome_options.add_experimental_option("prefs", prefs)
-        self.driver = webdriver.Chrome('/home/ubuntu/chromedriver', options=chrome_options)
+        self.driver = webdriver.Chrome('/home/ubuntu/chromedriver', options=chrome_options, service_log_path='/home/ubuntu')
     
     def get_offers(self, max_price=None, on_pool=None):
         if max_price is None:
