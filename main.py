@@ -38,7 +38,7 @@ class ArtTrader:
     def force_parse(self):
         self._force_parse = True
     
-    def parse_and_send(self, notify_subscribers):
+    def parse_and_send(self, notify_subscribers=True):
         price = self._telegram_manager.max_price
         if notify_subscribers:
             self.send_progress_info(0, 100, None, price, False)

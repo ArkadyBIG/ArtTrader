@@ -1,5 +1,3 @@
-from bs4 import BeautifulSoup
-import requests
 from selenium import webdriver
 import time
 from functools import cached_property
