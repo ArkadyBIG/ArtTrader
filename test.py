@@ -1,4 +1,4 @@
 from selenium import webdriver
 
-d = webdriver.Chrome('/home/ubuntu/chromedriver')
+d = webdriver.Chrome('/usr/bin/chromedriver')
 
