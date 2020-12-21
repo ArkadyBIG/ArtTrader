@@ -50,8 +50,10 @@ class NiftygatewayParser:
         
         if on_pool is None:
             on_pool = lambda *_: None
-        
+        _start = time.time()
+        print('loading 1')
         self._load_marketplace_page(1)
+        print('finished oading 1 ', time.time() - _start)
         page_count = self._get_marketplace_page_count()
         offers = self._get_offers_on_page(max_price)
         on_pool(1, page_count, offers, max_price)
