@@ -1,4 +1,4 @@
 from selenium import webdriver
 
-d = webdriver.Firefox('/usr/bin/geckodriver')
+d = webdriver.Firefox('/home/ubuntu/geckodriver')
 
