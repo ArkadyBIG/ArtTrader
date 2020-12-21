@@ -24,7 +24,7 @@ class ArtTrader:
         
         
         self._polling_thread = None
-        self._force_parse = False
+        self._force_parse = True
         self._list_offers = False
             
     def pooling(self, thread=False):
@@ -52,6 +52,8 @@ class ArtTrader:
                   self._database.insert_offer(o.token_id, o.contract_address, o.price, o.description)]
         if offers:
             self.send_offers(offers)
+        # else:
+            # self.se
     
     def send_offers(self, offers: List[Offer]):
         if offers:
@@ -61,6 +63,7 @@ class ArtTrader:
                 self._telegram_manager.send_to_subscribers(msg, markdown=True)
         
     def parsing(self, interval=3600):
+        self._telegram_manager.send_to_subscribers('Im working')
         while True:
             if self._force_parse or \
             (datetime.now() - self._last_parse).total_seconds() > interval:
