@@ -24,7 +24,7 @@ class ArtTrader:
         
         
         self._polling_thread = None
-        self._force_parse = True
+        self._force_parse = False
         self._list_offers = False
             
     def pooling(self, thread=False):
@@ -43,7 +43,7 @@ class ArtTrader:
         if notify_subscribers:
             self.send_progress_info(0, 100, None, price, False)
         
-        on_pool = notify_subscribers and self.send_progress_info
+        on_pool = self.send_progress_info if notify_subscribers else None 
         offers = self._parser.get_offers(price, on_pool)
         if notify_subscribers:
             self.send_progress_info(0, 0, offers, price, finished=True)
@@ -64,9 +64,9 @@ class ArtTrader:
         while True:
             if self._force_parse or \
             (datetime.now() - self._last_parse).total_seconds() > interval:
+                self.parse_and_send(self._force_parse)
                 self._force_parse = False
                 self._last_parse = datetime.now()
-                self.parse_and_send()
             
             if self._list_offers:
                 self.list_command()
@@ -107,12 +107,12 @@ class ArtTrader:
         self._database.close()
 
 def main():
-    # try:
-    trader = ArtTrader()
-    trader.pooling(thread=True)
-    trader.parsing()
-    # finally:
-    #     trader.close()
+    try:
+        trader = ArtTrader()
+        trader.pooling(thread=True)
+        trader.parsing()
+    finally:
+        trader.close()
     
     
 if __name__ == "__main__":

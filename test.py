@@ -1,4 +1,4 @@
 from selenium import webdriver
 
-d = webdriver.Chrome('/usr/bin/chroedriver')
+d = webdriver.Firefox('/usr/bin/geckodriver')
 

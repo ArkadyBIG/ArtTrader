@@ -17,7 +17,7 @@ class Subscriber:
     
 class _TelegramManager:
     def __init__(self):
-        self.subscribers = {Subscriber(-340690791)}#, Subscriber(-490809061)}
+        self.subscribers = {Subscriber(-340690791), Subscriber(-490809061)}
         self.max_price = 40
         self._database = None
         
