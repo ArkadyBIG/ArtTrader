@@ -110,12 +110,12 @@ class ArtTrader:
         self._database.close()
 
 def main():
-    try:
-        trader = ArtTrader()
-        trader.pooling(thread=True)
-        trader.parsing()
-    finally:
-        trader.close()
+    # try:
+    trader = ArtTrader()
+    trader.pooling(thread=True)
+    trader.parsing()
+    # finally:
+    trader.close()
     
     
 if __name__ == "__main__":
