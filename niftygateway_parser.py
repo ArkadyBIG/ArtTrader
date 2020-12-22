@@ -38,11 +38,11 @@ class NiftygatewayParser:
     def __init__(self, url=URL_MARKETPLACE):
         self._url_marketplace = url
         
-        # chrome_options = webdriver.ChromeOptions()
-        # prefs = {"profile.managed_default_content_settings.images": 2, 
-        #          'profile.default_content_settings.images': 2}
-        # chrome_options.add_experimental_option("prefs", prefs)
-        self.driver = webdriver.Firefox()
+        chrome_options = webdriver.ChromeOptions()
+        prefs = {"profile.managed_default_content_settings.images": 2, 
+                 'profile.default_content_settings.images': 2}
+        chrome_options.add_experimental_option("prefs", prefs)
+        self.driver = webdriver.Chrome(options=chrome_options, executable_path='/home/arkady/Desktop/chromedriver')
     
     def get_offers(self, max_price=None, on_pool=None):
         if max_price is None:
@@ -66,7 +66,7 @@ class NiftygatewayParser:
             offers += new_offers
             on_pool(page_number, page_count, offers, max_price)
 
-            empty_pages_in_row += not new_offers
+            empty_pages_in_row += (len(new_offers) != 20)
             if empty_pages_in_row >= 1:
                 break
         return offers

@@ -17,7 +17,7 @@ class Subscriber:
     
 class _TelegramManager:
     def __init__(self):
-        self.subscribers = {Subscriber(-340690791)}#, Subscriber(-490809061)}
+        self.subscribers = {Subscriber(-340690791), Subscriber(-490809061)}
         self.max_price = 40
         self._database = None
         
@@ -29,7 +29,7 @@ class _TelegramManager:
         self._database = db
         
     def process_start_command(self, message):
-        self.subscribers.add(message.chat.id)
+        self.subscribers.add(Subscriber(message.chat.id))
         _bot.send_message(message.chat.id, "I will notify this chat")
         print(message.chat.id)
     

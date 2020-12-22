@@ -24,7 +24,7 @@ class ArtTrader:
         
         
         self._polling_thread = None
-        self._force_parse = True
+        self._force_parse = False
         self._list_offers = False
             
     def pooling(self, thread=False):
@@ -63,7 +63,6 @@ class ArtTrader:
                 self._telegram_manager.send_to_subscribers(msg, markdown=True)
         
     def parsing(self, interval=3600):
-        self._telegram_manager.send_to_subscribers('Im working')
         while True:
             if self._force_parse or \
             (datetime.now() - self._last_parse).total_seconds() > interval:
@@ -92,6 +91,8 @@ class ArtTrader:
     
     def _last_parse_command(self):
         mins = (datetime.now() - self._last_parse).total_seconds() // 60
+        if mins > 100_000:
+            mins = 0
         self._telegram_manager.send_to_subscribers('Last parsed: %i minutes ago' % mins)
     
     def send_progress_info(self, current_page, pages_count, offers, max_price, edit_previous=True, finished=False):
